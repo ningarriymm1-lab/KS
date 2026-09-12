@@ -12,10 +12,10 @@ app.secret_key = 'your_super_secret_key_change_this_in_production'
 # DATABASE
 # =========================================================
 
-# เพิ่ม Route สำหรับให้ระบบภายนอกเข้ามาตรวจสอบไฟล์ HTML ยืนยันตัวตน
-@app.route('/google123456789abcdef.html')
-def verify_google():
-    return "google-site-verification="="weGo8IJjwUhkBdvIpgRURMztU0sJmoERgh6oD2y6-r8"
+# เพิ่มโค้ดนี้ลงใน app.py ของคุณ
+@app.route('/weGo8IJjwUhkBdvIpgRURMztU0sJmoERgh6oD2y6-r8.html')
+def google_verification():
+    return "google-site-verification=weGo8IJjwUhkBdvIpgRURMztU0sJmoERgh6oD2y6-r8"
 
 def init_db():
     db = sqlite3.connect("clean_shop.db")
