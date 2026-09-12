@@ -107,7 +107,7 @@ HTML_TEMPLATE = """
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>ระบบจัดการร้านค้า Clean Shop</title>
+    <title>ระบบติดตามขนส่ง Chok Shop</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
