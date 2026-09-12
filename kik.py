@@ -102,6 +102,8 @@ HTML_TEMPLATE = """
 
 <head>
 
+    <meta name="google-site-verification" content="weGo8IJjwUhkBdvIpgRURMztU0sJmoERgh6oD2y6-r8" />
+      
     <meta charset="UTF-8">
 
     <meta name="viewport"
