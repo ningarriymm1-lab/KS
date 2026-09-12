@@ -412,7 +412,7 @@ HTML_TEMPLATE = """
                         <button
                             type="button"
                             onclick="closeFlash(this)"
-                            class="ml-4 text-blue-700 hover:text-blue-900 font-bold text-xl leading-none">
+                            class="ml-4 text-green-700 hover:text-green-900 font-bold text-xl leading-none">
 
                             ×
 
