@@ -70,7 +70,7 @@ def init_db():
     cursor.execute("SELECT * FROM users WHERE username = 'admin'")
 
     if not cursor.fetchone():
-        hashed_pw = generate_password_hash('admin1234')
+        hashed_pw = generate_password_hash('55555')
 
         db.execute(
             """
@@ -1643,7 +1643,7 @@ HTML_TEMPLATE = """
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
 
                 <h3 class="text-lg font-bold text-gray-800 mb-4">
-                    🤝 รายชื่อเพื่อนร่วมงานของฉัน
+                     รายชื่อเพื่อนร่วมงานของฉัน
                 </h3>
 
 
