@@ -612,7 +612,7 @@ HTML_TEMPLATE = """
 
                 <button
                     type="submit"
-                    class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 rounded-lg transition text-sm shadow">
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition text-sm shadow">
 
                     สมัครสมาชิก
 
