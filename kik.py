@@ -412,7 +412,7 @@ HTML_TEMPLATE = """
                         <button
                             type="button"
                             onclick="closeFlash(this)"
-                            class="ml-4 text-green-700 hover:text-green-900 font-bold text-xl leading-none">
+                            class="ml-4 text-blue-700 hover:text-blue-900 font-bold text-xl leading-none">
 
                             ×
 
@@ -521,7 +521,7 @@ HTML_TEMPLATE = """
 
                 <button
                     type="submit"
-                    class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 rounded-lg transition text-sm shadow">
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition text-sm shadow">
 
                     เข้าสู่ระบบ
 
