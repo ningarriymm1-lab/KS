@@ -1,3 +1,3 @@
 name = "my-python-worker"
-main = "src/index.py"  # ปรับแก้ path นี้ให้ตรงกับตำแหน่งไฟล์ Python หลักของคุณจริงๆ (เช่น ถ้าไฟล์หลักชื่อ main.py อยู่ข้างนอก ให้เปลี่ยนเป็น "main.py")
+main = "src/Clean_Shop_Cloudflare.py"  # ปรับแก้ path นี้ให้ตรงกับตำแหน่งไฟล์ Python หลักของคุณจริงๆ (เช่น ถ้าไฟล์หลักชื่อ main.py อยู่ข้างนอก ให้เปลี่ยนเป็น "main.py")
 compatibility_date = "2024-03-20"
