@@ -1,6 +1,4 @@
-Flask
-gunicorn
-name = "my-python-worker"
-main = "src/main.py"
-compatibility_date = "2026-09-15"
-
+fastapi==0.110.0
+uvicorn[standard]>=0.28.0
+requests
+pydantic
