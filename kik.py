@@ -4629,13 +4629,129 @@ def delete_user(user_id):
 
 
 # =========================================================
-# RUN SERVER
+# CLOUDFLARE TUNNEL + FLASK SERVER
 # =========================================================
+# เปิดเว็บออกอินเทอร์เน็ตผ่าน Cloudflare Quick Tunnel
+# ไม่ต้องเปิด Port ที่ Router
+#
+# ติดตั้ง Cloudflared บน Windows:
+#   winget install Cloudflare.cloudflared
+#
+# แล้วรันไฟล์นี้:
+#   python Clean_Shop_Cloudflare.py
+#
+# โปรแกรมจะสร้าง URL ประมาณ:
+#   https://xxxxx.trycloudflare.com
+#
+# หมายเหตุ: URL แบบ Quick Tunnel จะเปลี่ยนใหม่เมื่อปิด/เปิดโปรแกรม
+
+import subprocess
+import shutil
+import atexit
+import threading
+import re
+
+CLOUDFLARED_PROCESS = None
+
+
+def start_cloudflare_tunnel():
+    global CLOUDFLARED_PROCESS
+
+    cloudflared = shutil.which("cloudflared")
+
+    if not cloudflared:
+        print("")
+        print("=" * 70)
+        print("ไม่พบคำสั่ง cloudflared")
+        print("ติดตั้ง Cloudflare Tunnel ด้วย:")
+        print("  winget install Cloudflare.cloudflared")
+        print("")
+        print("จากนั้นปิดแล้วเปิดโปรแกรมใหม่")
+        print("=" * 70)
+        print("")
+        return
+
+    try:
+        CLOUDFLARED_PROCESS = subprocess.Popen(
+            [
+                cloudflared,
+                "tunnel",
+                "--url",
+                "http://127.0.0.1:5000"
+            ],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            bufsize=1
+        )
+
+        def read_output():
+            found = False
+
+            if not CLOUDFLARED_PROCESS or not CLOUDFLARED_PROCESS.stdout:
+                return
+
+            for line in CLOUDFLARED_PROCESS.stdout:
+                line = line.strip()
+
+                if line:
+                    print("[Cloudflare]", line)
+
+                match = re.search(
+                    r"https://[a-zA-Z0-9-]+\.trycloudflare\.com",
+                    line
+                )
+
+                if match and not found:
+                    found = True
+                    print("")
+                    print("=" * 70)
+                    print("🌐 CLOUDFLARE เชื่อมต่อสำเร็จ")
+                    print("🔗 URL สำหรับเข้าเว็บ:")
+                    print(match.group(0))
+                    print("=" * 70)
+                    print("")
+
+        threading.Thread(
+            target=read_output,
+            daemon=True
+        ).start()
+
+        print("")
+        print("☁️ กำลังเชื่อมต่อ Cloudflare...")
+        print("🏠 Local: http://127.0.0.1:5000")
+        print("⏳ กรุณารอ URL จาก Cloudflare...")
+        print("")
+
+    except Exception as e:
+        print("")
+        print("❌ เปิด Cloudflare Tunnel ไม่สำเร็จ:", e)
+        print("")
+
+
+def stop_cloudflare_tunnel():
+    global CLOUDFLARED_PROCESS
+
+    if CLOUDFLARED_PROCESS is not None:
+        try:
+            CLOUDFLARED_PROCESS.terminate()
+        except Exception:
+            pass
+
+
+atexit.register(stop_cloudflare_tunnel)
+
 
 if __name__ == "__main__":
+    # ต้องเปิด Cloudflare ก่อน Flask เล็กน้อย
+    # และปิด debug/reloader เพื่อไม่ให้ Tunnel เปิดซ้ำ
+    start_cloudflare_tunnel()
 
     app.run(
         host="0.0.0.0",
         port=5000,
-        debug=True
+        debug=False,
+        use_reloader=False
     )
